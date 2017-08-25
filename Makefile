@@ -27,28 +27,31 @@
 all:		src modules
 
 src:
-		cd src ; $(MAKE) ; cd ..
+		$(MAKE) -C src
 
 modules:
-		cd modules ; $(MAKE) ; cd ..
+		$(MAKE) -C modules
 
 test:
-		cd test ; $(MAKE) test ; cd ..
+		@chmod +x ./tools/test_iris2odim.sh
+		@./tools/test_iris2odim.sh
 
 doc:
-		cd doxygen ; $(MAKE) doc ; cd ..
+		$(MAKE) -C doxygen doc
 
 install:
-		cd src ; $(MAKE) install ; cd ..
-		cd modules ; $(MAKE) install ; cd ..
+		$(MAKE) -C src install
+		$(MAKE) -C modules install
+		$(MAKE) -C Lib install
 
 .PHONY=clean
 clean:
-		cd src ; $(MAKE) clean ; cd ..
-		cd modules ; $(MAKE) clean ; cd ..
-		cd doxygen ; $(MAKE) clean ; cd ..
+		$(MAKE) -C src clean
+		$(MAKE) -C modules clean
+		$(MAKE) -C doxygen clean
 
 .PHONY=distclean		 
 distclean:	clean
-		cd src ; $(MAKE) distclean ; cd ..
-		cd modules ; $(MAKE) distclean ; cd ..
+		$(MAKE) -C src distclean
+		$(MAKE) -C modules distclean
+		$(MAKE) -C doxygen distclean
