@@ -1,0 +1,12 @@
+README for iris2odim
+
+Daniel Michelson and Mark Couture
+Environment and Climate Change Canada
+
+Installation instructions are found in the INSTALL file.
+
+This package is an add-on to RAVE for reading radar data in IRIS format directly
+into RAVE representation in memory, for data processing and outputting to 
+ODIM_H5.
+
+RAVE and its packages can be found at git.baltrad.eu.
