@@ -29,12 +29,16 @@ import _raveio
 import _iris2odim
 import numpy as np
 
+# Not needed because RAVE assigns these automagically
+IGNORE = ['what/version', 'what/object']
+
+
 ## Helper functions for ODIM validation below. For some reason, unit test
 #  objects can't pass tests to methods, but they can be passed to functions.
 
 def validateAttributes(utest, obj, ref_obj):
     for aname in ref_obj.getAttributeNames():
-#            print aname
+        if aname not in IGNORE:
             attr = obj.getAttribute(aname)
             ref_attr = ref_obj.getAttribute(aname)
             if isinstance(ref_attr, np.ndarray):  # Arrays get special treatment
@@ -42,7 +46,7 @@ def validateAttributes(utest, obj, ref_obj):
             else:
                 #print aname, attr, ref_attr
                 utest.assertEquals(attr, ref_attr)
-
+#        else: print aname
 
 def validateTopLevel(utest, obj, ref_obj):
     utest.assertEquals(obj.source, ref_obj.source)
