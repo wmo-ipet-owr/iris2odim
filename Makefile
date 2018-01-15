@@ -42,7 +42,6 @@ doc:
 install:
 		$(MAKE) -C src install
 		$(MAKE) -C modules install
-		$(MAKE) -C Lib install
 
 .PHONY=clean
 clean:
