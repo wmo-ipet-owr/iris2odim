@@ -1,6 +1,6 @@
 # Additional install notes:
 
-# set RAVEROOT environment variable:
+# set RAVEROOT environment variable, for example if rave installed in /opt/baltrad/rave:
 export RAVEROOT=/opt/baltrad
 
 # compile
