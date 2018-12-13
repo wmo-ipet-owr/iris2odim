@@ -1,0 +1,11 @@
+# Additional install notes:
+
+# set RAVEROOT environment variable:
+export RAVEROOT=/opt/baltrad
+
+# compile
+make
+
+# install
+# note that as super user the RAVEROOT environment variable is no longer available, so have to add it again
+sudo make install RAVEROOT=/opt/baltrad
