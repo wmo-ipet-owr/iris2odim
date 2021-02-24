@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------
-Copyright (C) 2015 The Crown (i.e. Her Majesty the Queen in Right of Canada)
+Copyright (C) 2020 The Crown (i.e. Her Majesty the Queen in Right of Canada)
 
 This file is an add-on to RAVE.
 
@@ -21,8 +21,10 @@ along with RAVE.  If not, see <http://www.gnu.org/licenses/>.
  * @file
  * @author Daniel Michelson, Environment Canada
  * @date 2015-10-28
+ * @author Peter Rodriguez, Environment Canada
+ * @date 2020-09-01, upgrade to use Python >2.6 and Python 3 compatibility file
  */
-#include "Python.h"
+#include "pyiris2odim_compat.h"
 #include "arrayobject.h"
 #include "rave.h"
 #include "rave_debug.h"
@@ -142,21 +144,29 @@ static struct PyMethodDef _iris2odim_functions[] =
 /**
  * Initialize the _iris2odim module
  */
-PyMODINIT_FUNC init_iris2odim(void)
+MOD_INIT(_iris2odim)
 {
-  PyObject* m;
-  m = Py_InitModule("_iris2odim", _iris2odim_functions);
-  ErrorObject = PyString_FromString("_iris2odim.error");
-
-  if (ErrorObject == NULL || PyDict_SetItemString(PyModule_GetDict(m),
-                                                  "error", ErrorObject) != 0) {
-    Py_FatalError("Can't define _iris2odim.error");
+  PyObject* module = NULL;
+  PyObject* dictionary = NULL;
+  
+  MOD_INIT_DEF(module, "_iris2odim", NULL/*doc*/, _iris2odim_functions);
+  if (module == NULL) {
+    return MOD_INIT_ERROR;
   }
+
+  dictionary = PyModule_GetDict(module);
+  ErrorObject = PyErr_NewException("_iris2odim.error", NULL, NULL);
+  if (ErrorObject == NULL || PyDict_SetItemString(dictionary, "error", ErrorObject) != 0) {
+    Py_FatalError("Can't define _iris2odim.error");
+    return MOD_INIT_ERROR;
+  }
+
   import_pyraveio();
   import_pypolarvolume();
   import_pypolarscan();
   import_array(); /*To make sure I get access to numpy*/
   PYRAVE_DEBUG_INITIALIZE;
+  return MOD_INIT_SUCCESS(module);
 }
 
 /*@} End of Module setup */
