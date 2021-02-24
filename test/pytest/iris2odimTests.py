@@ -104,7 +104,7 @@ def validateScan(utest, scan, ref_scan):
     validateAttributes(utest, scan, ref_scan)
 
 
-class rb52odimTest(unittest.TestCase):
+class iris2odimTest(unittest.TestCase):
     SCAN = '../WKR_201601201250_POLPPI.iri'
     PVOL = '../WKR_201601201250_CONVOL.iri'
     BAD = '../empty_file.nul'
