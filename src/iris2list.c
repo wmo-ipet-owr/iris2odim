@@ -30,9 +30,6 @@ along with RAVE.  If not, see <http://www.gnu.org/licenses/>.
 #include <unistd.h>
 #include <string.h> //strtok_s, memcpy
 #include <sys/types.h>
-#include <error.h>
-#include <argp.h>
-#include <argz.h>
 #include <time.h>
 #include "iris2odim.h" // this includes rave_alloc and other rave related
 #include "iris2list_listobj.h"
